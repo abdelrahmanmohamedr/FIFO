@@ -115,8 +115,8 @@ property rd_prta;
 	@(posedge FIFOint.clk) disable iff (!FIFOint.rst_n) ($past(FIFOint.rd_en) && $past(count) != 0 && $past(FIFOint.rst_n)) |-> rd_ptr == $past(rd_ptr) + 1'b1																//rd_ptr property
 endproperty
 
-property count_constant;
-	@(posedge FIFOint.clk) disable iff (!FIFOint.rst_n) ($past(FIFOint.wr_en) && !$past(FIFOint.full) && $past(FIFOint.rd_en) && !$past(FIFOint.empty) && $past(FIFOint.rst_n)) |-> count == $past(count) + 1'b1			//count_increment property
+property count_constanta;
+	@(posedge FIFOint.clk) disable iff (!FIFOint.rst_n) ($past(FIFOint.wr_en) && !$past(FIFOint.full) && $past(FIFOint.rd_en) && !$past(FIFOint.empty) && $past(FIFOint.rst_n)) |-> count == $past(count)			//count_constant property
 endproperty
 
 property count_incrementa;
@@ -141,6 +141,9 @@ cover property  (wr_ptra);					//wr_ptr property cover
 
 assert property (rd_prta);					//rd_ptr property assertion
 cover property  (rd_prta);					//rd_ptr property cover
+
+assert property (count_constanta);			//count_constant property assertion	
+cover property  (count_constanta);			//count_constant property cover
 
 assert property (count_incrementa);			//count_increment property assertion	
 cover property  (count_incrementa);			//count_increment property cover
